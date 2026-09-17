@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VoteSecure | Voter Verification</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            🗳️ VoteSecure
+        </div>
+
+        <div class="header-text">
+            Secure • Simple • Transparent
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="verification-container">
+
+        <div class="verification-box">
+
+            <div class="verification-icon">
+                🔐
+            </div>
+
+            <h1>Voter Verification</h1>
+
+            <p class="verification-subtitle">
+                Verify your voter details before continuing to the election.
+            </p>
+
+
+            <!-- FORM -->
+
+            <form id="verificationForm">
+
+                <!-- VOTER ID -->
+
+                <div class="input-group">
+
+                    <label for="voterid">
+                        Voter ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="voterid"
+                        placeholder="Enter your Voter ID"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- NAME -->
+
+                <div class="input-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DATE OF BIRTH -->
+
+                <div class="input-group">
+
+                    <label for="dob">
+                        Date of Birth
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dob"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- VERIFY BUTTON -->
+
+                <button type="submit" class="verify-btn">
+                    Verify Voter
+                </button>
+
+            </form>
+
+
+            <!-- VERIFICATION MESSAGE -->
+
+            <div id="verificationMessage"></div>
+
+<p class="security-note">
+    🔒 Your information is securely processed for voter verification.
+</p>
+
+<div class="page-navigation">
+
+    <button
+        type="button"
+        class="previous-btn"
+        onclick="window.location.href='index.html'">
+        ← Previous
+    </button>
+
+    <button
+        type="button"
+        class="next-btn"
+        onclick="window.location.href='voting.html'">
+        Next →
+    </button>
+
+</div>
+
+</div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>© 2026 Online Voting System</span>
+
+        <span>Secure Digital Voting</span>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+<script>
+const verificationForm = document.getElementById("verificationForm");
+const verificationMessage = document.getElementById("verificationMessage");
+
+verificationForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const voterId = document.getElementById("voterid").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const dob = document.getElementById("dob").value;
+
+    if (!voterId || !name || !dob) {
+        verificationMessage.innerHTML =
+            `<div class="error-message">Please enter all voter details.</div>`;
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:5000/api/auth/verify", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                voterId: voterId,
+                name: name,
+                dob: dob
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            verificationMessage.innerHTML =
+                `<div class="error-message">${data.message}</div>`;
+            return;
+        }
+
+        localStorage.setItem("currentVoterId", voterId);
+        localStorage.setItem("voterName", name);
+
+        verificationMessage.innerHTML =
+            `<div class="success-message">
+                ✓ Voter verified successfully!
+            </div>`;
+
+        setTimeout(() => {
+            window.location.href = "voting.html";
+        }, 800);
+
+    } catch (error) {
+        verificationMessage.innerHTML =
+            `<div class="error-message">
+                Backend connection failed.
+            </div>`;
+        console.error(error);
+    }
+});
+</script>
+  

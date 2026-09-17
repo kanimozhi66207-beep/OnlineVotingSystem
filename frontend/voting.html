@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Voting System | Vote</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            🗳️ VoteSecure
+        </div>
+
+        <div class="header-text">
+            Online Voting System
+        </div>
+
+    </header>
+
+
+    <!-- VOTING SECTION -->
+
+    <main class="voting-container">
+
+        <div class="voting-title">
+
+            <span class="badge">
+                🗳️ Current Election
+            </span>
+
+            <h1>
+                Cast Your Vote
+            </h1>
+
+            <p>
+                Select one candidate and submit your vote.
+            </p>
+
+        </div>
+
+
+        <!-- VOTING BOX -->
+
+        <div class="voting-box">
+
+            <h2>
+                Select Your Candidate
+            </h2>
+
+            <p class="instruction">
+                Please select only one candidate.
+            </p>
+
+
+            <!-- CANDIDATE 1 -->
+
+            <label class="candidate-card">
+
+                <input
+                    type="radio"
+                    name="candidate"
+                    value="Candidate 1"
+                >
+
+                <div class="candidate-icon">
+                    👤
+                </div>
+
+                <div class="candidate-info">
+
+                    <h3>
+                        Candidate 1
+                    </h3>
+
+                    <p>
+                        Candidate for Election
+                    </p>
+
+                </div>
+
+                <div class="select-text">
+                    Select
+                </div>
+
+            </label>
+
+
+            <!-- CANDIDATE 2 -->
+
+            <label class="candidate-card">
+
+                <input
+                    type="radio"
+                    name="candidate"
+                    value="Candidate 2"
+                >
+
+                <div class="candidate-icon">
+                    👤
+                </div>
+
+                <div class="candidate-info">
+
+                    <h3>
+                        Candidate 2
+                    </h3>
+
+                    <p>
+                        Candidate for Election
+                    </p>
+
+                </div>
+
+                <div class="select-text">
+                    Select
+                </div>
+
+            </label>
+
+
+            <!-- CANDIDATE 3 -->
+
+            <label class="candidate-card">
+
+                <input
+                    type="radio"
+                    name="candidate"
+                    value="Candidate 3"
+                >
+
+                <div class="candidate-icon">
+                    👤
+                </div>
+
+                <div class="candidate-info">
+
+                    <h3>
+                        Candidate 3
+                    </h3>
+
+                    <p>
+                        Candidate for Election
+                    </p>
+
+                </div>
+
+                <div class="select-text">
+                    Select
+                </div>
+
+            </label>
+
+
+            <!-- SUBMIT -->
+
+            <button onclick="submitVote()">
+                Submit Vote →
+            </button>
+
+
+            <div class="vote-warning">
+                ⚠️ Please check your selection before submitting.
+            </div>
+
+        </div>
+
+
+      <div class="page-navigation">
+
+    <button
+        type="button"
+        class="previous-btn"
+        onclick="window.location.href='login.html'">
+        ← Previous
+    </button>
+
+    <button
+        type="button"
+        class="next-btn"
+        onclick="window.location.href='result.html'">
+        Next →
+    </button>
+
+</div>
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Online Voting System
+        </p>
+
+        <p>
+            Secure • Simple • Digital
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+   <script>
+const voterId = localStorage.getItem("currentVoterId");
+const voterName = localStorage.getItem("voterName");
+const candidate = localStorage.getItem("lastVotedCandidate");
+
+document.getElementById("voterName").textContent =
+    voterName || "Voter";
+
+document.getElementById("candidateName").textContent =
+    candidate || "Candidate";
+</script>
