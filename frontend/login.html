@@ -168,7 +168,7 @@ verificationForm.addEventListener("submit", async function(event) {
     }
 
     try {
-        const response = await fetch("http://localhost:5000/api/auth/verify", {
+        const response = await fetch("https://onlinevotingsystem-fe9r.onrender.com/api/auth/verify", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
